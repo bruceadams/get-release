@@ -1,0 +1,16 @@
+name: 'Get the upload URL for a release'
+description: 'Get the upload URL for a release for a tag in your repository'
+author: 'GitHub'
+outputs:
+  id:
+    description: 'The ID of the Release'
+  html_url:
+    description: 'The URL users can navigate to in order to view the release'
+  upload_url:
+    description: 'The URL for uploading assets to the release'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
