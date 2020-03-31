@@ -29,13 +29,17 @@ async function run() {
       data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
     } = getReleaseResponse;
 
+    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}'`);
+    
     // Set the output variables for use by other actions: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
-    core.setOutput("id", releaseId);
+    core.setOutput("id", releaseId.toString());
     core.setOutput("html_url", htmlUrl);
     core.setOutput("upload_url", uploadUrl);
   } catch (error) {
+    console.log(error);
     core.setFailed(error.message);
   }
 }
 
 module.exports = run;
+
