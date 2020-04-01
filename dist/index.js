@@ -24716,11 +24716,17 @@ const { GitHub, context } = __webpack_require__(469);
 
 async function run() {
   try {
+    console.log("starting into get-release");
+
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
     const github = new GitHub(process.env.GITHUB_TOKEN);
 
+    console.log("have the Github token");
+
     // Get owner and repo from context of payload that triggered the action
     const { owner, repo } = context.repo;
+
+    console.log(`owner '${owner}' and repo '${repo}'`);
 
     // Get the tag name from the triggered action
     const tagName = context.ref;
@@ -24728,7 +24734,7 @@ async function run() {
     console.log(`tagName: '${tagName}'`);
 
     // This removes the 'refs/tags' portion of the string, i.e. from 'refs/tags/v1.10.15' to 'v1.10.15'
-    const tag = tagName.toString().replace("refs/tags/", "");
+    const tag = tagName.replace("refs/tags/", "");
 
     // Get a release from the tag name
     // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
