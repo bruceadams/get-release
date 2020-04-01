@@ -1,3 +1,5 @@
+console.log("before begining get-release");
+
 const core = require("@actions/core");
 const { GitHub, context } = require("@actions/github");
 
@@ -8,17 +10,11 @@ async function run() {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
     const github = new GitHub(process.env.GITHUB_TOKEN);
 
-    console.log("have the Github token");
-
     // Get owner and repo from context of payload that triggered the action
     const { owner, repo } = context.repo;
 
-    console.log(`owner '${owner}' and repo '${repo}'`);
-
     // Get the tag name from the triggered action
     const tagName = context.ref;
-
-    console.log(`tagName: '${tagName}'`);
 
     // This removes the 'refs/tags' portion of the string, i.e. from 'refs/tags/v1.10.15' to 'v1.10.15'
     const tag = tagName.replace("refs/tags/", "");
@@ -42,7 +38,7 @@ async function run() {
     );
 
     // Set the output variables for use by other actions: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
-    core.setOutput("id", releaseId.toString());
+    core.setOutput("id", releaseId); // Do I need .toString() here for reals?
     core.setOutput("html_url", htmlUrl);
     core.setOutput("upload_url", uploadUrl);
   } catch (error) {
