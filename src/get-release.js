@@ -12,8 +12,10 @@ async function run() {
     // Get the tag name from the triggered action
     const tagName = context.ref;
 
+    console.log(`tagName: '${tagName}'`);
+
     // This removes the 'refs/tags' portion of the string, i.e. from 'refs/tags/v1.10.15' to 'v1.10.15'
-    const tag = tagName.replace("refs/tags/", "");
+    const tag = tagName.toString().replace("refs/tags/", "");
 
     // Get a release from the tag name
     // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
@@ -29,8 +31,10 @@ async function run() {
       data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
     } = getReleaseResponse;
 
-    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}'`);
-    
+    console.log(
+      `Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}'`
+    );
+
     // Set the output variables for use by other actions: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
     core.setOutput("id", releaseId.toString());
     core.setOutput("html_url", htmlUrl);
@@ -42,4 +46,3 @@ async function run() {
 }
 
 module.exports = run;
-
