@@ -1,6 +1,10 @@
 name: 'Get the upload URL for a release'
 description: 'Get the upload URL for a release for a tag in your repository'
 author: 'GitHub'
+inputs:
+  fake:
+    description: 'Feed the beast with a fake input'
+    default: 'fake'
 outputs:
   id:
     description: 'The ID of the Release'
