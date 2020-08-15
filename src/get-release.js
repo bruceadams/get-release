@@ -35,6 +35,7 @@ async function run() {
     core.setOutput("id", releaseId.toString());
     core.setOutput("html_url", htmlUrl);
     core.setOutput("upload_url", uploadUrl);
+    core.setOutput("tag_name", tag);
   } catch (error) {
     console.log(error);
     core.setFailed(error.message);
