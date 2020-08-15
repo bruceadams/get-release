@@ -6,8 +6,7 @@
   "scripts": {
     "lint": "eslint 'src/**.js' 'tests/**.js' --fix",
     "test": "eslint 'src/**.js' 'tests/**.js' && jest --coverage",
-    "build": "ncc build src/main.js",
-    "precommit": "npm run build && git add dist/"
+    "build": "ncc build src/main.js"
   },
   "repository": {
     "type": "git",
@@ -49,6 +48,11 @@
         "lines": 80,
         "statements": 80
       }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build && git add dist/"
     }
   }
 }
