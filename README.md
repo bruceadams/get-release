@@ -28,9 +28,6 @@ on:
   release:
     types: [created]
 
-env:
-  GITHUB_TOKEN: ${{ github.token }}
-
 jobs:
   build:
     name: Build release binary
@@ -42,12 +39,16 @@ jobs:
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build binary
         run: cargo build --release --verbose
 
       - name: Upload release binary
         uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./target/release/my-widget
