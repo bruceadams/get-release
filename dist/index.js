@@ -4168,6 +4168,12 @@ function convertBody(buffer, headers) {
 	// html4
 	if (!res && str) {
 		res = /<meta[\s]+?http-equiv=(['"])content-type\1[\s]+?content=(['"])(.+?)\2/i.exec(str);
+		if (!res) {
+			res = /<meta[\s]+?content=(['"])(.+?)\1[\s]+?http-equiv=(['"])content-type\3/i.exec(str);
+			if (res) {
+				res.pop(); // drop last quote
+			}
+		}
 
 		if (res) {
 			res = /charset=(.*)/i.exec(res.pop());
@@ -5175,7 +5181,7 @@ function fetch(url, opts) {
 				// HTTP fetch step 5.5
 				switch (request.redirect) {
 					case 'error':
-						reject(new FetchError(`redirect mode is set to error: ${request.url}`, 'no-redirect'));
+						reject(new FetchError(`uri requested responds with a redirect, redirect mode is set to error: ${request.url}`, 'no-redirect'));
 						finalize();
 						return;
 					case 'manual':
@@ -5214,7 +5220,8 @@ function fetch(url, opts) {
 							method: request.method,
 							body: request.body,
 							signal: request.signal,
-							timeout: request.timeout
+							timeout: request.timeout,
+							size: request.size
 						};
 
 						// HTTP-redirect fetch step 9
@@ -24839,16 +24846,20 @@ async function run() {
 
     // Get the ID, html_url, and upload URL for the created Release from the response
     const {
-      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
+      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, name: name, body: body, draft: draft, prerelease: prerelease }
     } = getReleaseResponse;
 
-    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}'`);
-    
+    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}'`);
+
     // Set the output variables for use by other actions: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
     core.setOutput("id", releaseId.toString());
     core.setOutput("html_url", htmlUrl);
     core.setOutput("upload_url", uploadUrl);
     core.setOutput("tag_name", tag);
+    core.setOutput("name", name);
+    core.setOutput("body", body);
+    core.setOutput("draft", draft);
+    core.setOutput("prerelease", prerelease);
   } catch (error) {
     console.log(error);
     core.setFailed(error.message);

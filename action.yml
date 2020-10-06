@@ -3,11 +3,21 @@ description: 'Get the upload URL for a release for a tag in your repository'
 author: 'GitHub'
 outputs:
   id:
-    description: 'The ID of the Release'
+    description: 'The ID of the release'
   html_url:
     description: 'The URL users can navigate to in order to view the release'
   upload_url:
     description: 'The URL for uploading assets to the release'
+  tag_name:
+    description: 'The git tag associated with the release.'
+  name:
+    description: 'The name of the release'
+  body:
+    description: 'The body of the release'
+  draft:
+    description: 'Whether this release is marked as a draft or not'
+  prerelease:
+    description: 'Whether this release is marked as a pre-release or not'
 runs:
   using: 'node12'
   main: 'dist/index.js'

@@ -24,18 +24,22 @@ async function run() {
       tag
     });
 
-    // Get the ID, html_url, and upload URL for the created Release from the response
+    // Get the outputs for the created release from the response
     const {
-      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
+      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, name: name, body: body, draft: draft, prerelease: prerelease }
     } = getReleaseResponse;
 
-    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}'`);
-    
+    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}'`);
+
     // Set the output variables for use by other actions: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
     core.setOutput("id", releaseId.toString());
     core.setOutput("html_url", htmlUrl);
     core.setOutput("upload_url", uploadUrl);
     core.setOutput("tag_name", tag);
+    core.setOutput("name", name);
+    core.setOutput("body", body);
+    core.setOutput("draft", draft);
+    core.setOutput("prerelease", prerelease);
   } catch (error) {
     console.log(error);
     core.setFailed(error.message);
