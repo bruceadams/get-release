@@ -19,7 +19,7 @@
   "author": "GitHub",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/github": "^2.2.0"
   },
@@ -28,10 +28,10 @@
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.6.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^2.7.0",
-    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react": "^7.21.3",
     "husky": "^3.0.5",
     "jest": "^25.5.4",
     "prettier": "^1.16.4"
