@@ -26,7 +26,7 @@ async function run() {
 
     // Get the outputs for the created release from the response
     const {
-      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, name: name, body: body, draft: draft, prerelease: prerelease }
+      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, name: name, body: body, draft: draft, prerelease: prerelease, author: author }
     } = getReleaseResponse;
 
     console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}'`);
@@ -40,6 +40,7 @@ async function run() {
     core.setOutput("body", body);
     core.setOutput("draft", draft);
     core.setOutput("prerelease", prerelease);
+    core.setOutput("author", author);
   } catch (error) {
     console.log(error);
     core.setFailed(error.message);
