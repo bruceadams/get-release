@@ -21,7 +21,7 @@ For more information on these outputs, see the [API Documentation](https://devel
 
 ### Example workflow
 
-Everytime a new release is created, build a binary for the release and upload it to the release on Github. This example is building and uploading a Linux binary for a Rust executable.
+Everytime a new release is created, build a binary for the release and upload it to the release on GitHub. This example is building and uploading a Linux binary for a Rust executable.
 
 ```yaml
 on:
