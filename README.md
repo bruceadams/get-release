@@ -1,4 +1,4 @@
-# GitHub Action - Get a Releases
+# GitHub Action - Get a Release
 
 This GitHub Action (written in JavaScript) wraps the [GitHub Release API](https://developer.github.com/v3/repos/releases/), specifically the [Get a Release](https://developer.github.com/v3/repos/releases/#create-a-release) endpoint, to allow you to leverage GitHub Actions to get releases.
 
