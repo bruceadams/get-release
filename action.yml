@@ -19,7 +19,7 @@ outputs:
   prerelease:
     description: 'Whether this release is marked as a pre-release or not'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 branding:
   icon: 'tag'
